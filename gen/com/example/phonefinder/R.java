@@ -21,29 +21,57 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int bg_color_blue=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int password_button=0x7f020002;
-        public static final int settings_button=0x7f020003;
-        public static final int sign_up_button=0x7f020004;
-        public static final int start_button=0x7f020005;
-        public static final int third_party_number=0x7f020006;
-        public static final int uninstall_button=0x7f020007;
-        public static final int welcome_msg=0x7f020008;
+        public static final int back_button=0x7f020000;
+        public static final int bg_color_blue=0x7f020001;
+        public static final int confirm_button=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int lock_button=0x7f020004;
+        public static final int password_button=0x7f020005;
+        public static final int settings_button=0x7f020006;
+        public static final int sign_up_button=0x7f020007;
+        public static final int start_button=0x7f020008;
+        public static final int third_party_number=0x7f020009;
+        public static final int uninstall_button=0x7f02000a;
+        public static final int welcome_msg=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f080007;
-        public static final int createAccount=0x7f080005;
+        public static final int TextView01=0x7f08000e;
+        public static final int TextView02=0x7f080010;
+        public static final int TextView03=0x7f080016;
+        public static final int TextView04=0x7f080018;
+        public static final int TextView10=0x7f080003;
+        public static final int TextView20=0x7f080006;
+        public static final int TextView30=0x7f080008;
+        public static final int acctConfirmPassword=0x7f080009;
+        public static final int acctPassword=0x7f080007;
+        public static final int action_settings=0x7f08001d;
+        public static final int backToMainButton=0x7f080017;
+        public static final int confirmPassword=0x7f08000c;
+        public static final int createAccount=0x7f080013;
+        public static final int emailAddress=0x7f080004;
         public static final int guiSettings=0x7f080001;
         public static final int guiStart=0x7f080000;
-        public static final int setPassword=0x7f080004;
-        public static final int setThirdPartyNumber=0x7f080003;
-        public static final int uninstall=0x7f080006;
+        public static final int newPassword=0x7f08000f;
+        public static final int oldPassword=0x7f08000d;
+        public static final int setPassword=0x7f080012;
+        public static final int setPasswordText=0x7f080015;
+        public static final int setThirdPartyNumber=0x7f080011;
+        public static final int submitOnlineAcct=0x7f08000a;
+        public static final int submitPassword=0x7f08000b;
+        public static final int submitThirdPartyInfo=0x7f08001c;
+        public static final int textView1=0x7f080005;
+        public static final int thirdPartyName=0x7f080019;
+        public static final int thirdPartyNum=0x7f08001a;
+        public static final int thirdPartyPassword=0x7f08001b;
+        public static final int uninstall=0x7f080014;
         public static final int welcomeMsg=0x7f080002;
     }
     public static final class layout {
         public static final int activity_phone_finder=0x7f030000;
-        public static final int settings=0x7f030001;
+        public static final int create_online_account=0x7f030001;
+        public static final int setpassword=0x7f030002;
+        public static final int settings=0x7f030003;
+        public static final int third_party_contact=0x7f030004;
     }
     public static final class menu {
         public static final int phone_finder=0x7f070000;

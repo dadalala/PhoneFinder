@@ -21,7 +21,8 @@
         android:layout_alignLeft="@+id/setThirdPartyNumber"
         android:layout_below="@+id/setThirdPartyNumber"
         android:layout_marginTop="19dp"
-        android:background="@drawable/sign_up_button" />
+        android:background="@drawable/sign_up_button"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/uninstall"
@@ -45,5 +46,70 @@
         android:maxWidth="48dp"
         android:minWidth="48dp"
         android:text=" " />
+
+    <TextView
+        android:id="@+id/setPasswordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/setPassword"
+        android:layout_alignBottom="@+id/setPassword"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/setPassword"
+        android:text="Set Password"
+        android:textColor="#003366"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/setThirdPartyNumber"
+        android:layout_alignBottom="@+id/setThirdPartyNumber"
+        android:layout_alignLeft="@+id/setPasswordText"
+        android:text="Third Party Contact"
+        android:textColor="#003366"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/createAccount"
+        android:layout_alignBottom="@+id/createAccount"
+        android:layout_alignLeft="@+id/TextView01"
+        android:text="Create Online Account"
+        android:textColor="#003366"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/uninstall"
+        android:layout_alignBottom="@+id/uninstall"
+        android:layout_alignLeft="@+id/TextView02"
+        android:text="Delete Application"
+        android:textColor="#003366"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/backToMainButton"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_alignLeft="@+id/uninstall"
+        android:layout_below="@+id/uninstall"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/back_button" />
+    
+     <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/backToMainButton"
+        android:layout_alignBottom="@+id/backToMainButton"
+        android:layout_alignLeft="@+id/TextView03"
+        android:text="Back To Start"
+        android:textColor="#003366"
+        android:textSize="24sp" />
 
 </RelativeLayout>
