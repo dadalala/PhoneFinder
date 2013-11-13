@@ -7,6 +7,9 @@ import java.util.Locale;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 
 import android.os.Handler;
 import android.os.Message;
@@ -20,9 +23,10 @@ public class CollectGPSLocation implements Runnable {
 		private volatile boolean execute;
 		
 		//other varables
-		GPSTracker gps;
 		Context collectGPSLocationContext;
 		Context collectGPSLocationBaseContext;
+		double latitude = -1;
+		double longitude = -1;
 		
 		//constructor
 		public CollectGPSLocation(Handler handler, Context context, Context baseContext) {
@@ -31,6 +35,8 @@ public class CollectGPSLocation implements Runnable {
 			collectGPSLocationBaseContext = baseContext;
 		   }
 		
+
+		
 		@Override
 	    public void run() {
 			//start thread
@@ -38,34 +44,21 @@ public class CollectGPSLocation implements Runnable {
 			
 			Log.d("CollectGPSLocation","thread starts running");
 			
-			gps = new GPSTracker(collectGPSLocationContext);
-			
-			
-			Log.d("CollectGPSLocation","start getting address");
 			//continue running till main thread calls terminate
 			while (this.execute)
 			{
-				//do stuff here....
-				// check if GPS enabled     
-		        if(gps.canGetLocation()){
-		        	
-		        	
-		        	
-		        	Handler handler = new Handler()
-		            {
-
-		        		@Override public void handleMessage(Message msg)
-		                    {
-		                    
-		                    }
-		        		
-		            };
-
-		            gps.getLatitude();
-		            gps.getLongitude();
-		            
-		            Log.d("Getting address", "Latitude = " + gps.getLatitude());
-		            Log.d("Getting address", "Longitude = " + gps.getLongitude());
+				
+				LocationManager lm = (LocationManager)collectGPSLocationContext.getSystemService(collectGPSLocationContext.LOCATION_SERVICE);
+				Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				
+				longitude = location.getLongitude();
+				latitude = location.getLatitude();
+ 
+	            if(latitude >= 0 && longitude >= 0)
+	            {
+	            
+		            Log.d("Getting address", "Latitude = " + latitude);
+		            Log.d("Getting address", "Longitude = " + longitude);
 		            
 		            Geocoder geoCoder = new Geocoder(
 		            		collectGPSLocationBaseContext, Locale.getDefault() );
@@ -92,9 +85,10 @@ public class CollectGPSLocation implements Runnable {
 		    		{
 		    			 e.printStackTrace();
 		    		}
-		        }
+	            }
+		        
 				
-		        this.execute = false;
+		        //this.execute = false;
 			}// while
 			
 			Log.d("CollectGPSLocation","thread terminating running");
@@ -105,5 +99,9 @@ public class CollectGPSLocation implements Runnable {
 		public void terminate() {
 	        this.execute = false;
 	    }
+		
+		
+		
+		
 
 }
