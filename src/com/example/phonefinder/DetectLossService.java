@@ -1,19 +1,58 @@
 package com.example.phonefinder;
 
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
 public class DetectLossService extends Service {
+	
+	private TestThreading2 smsCheckerRunnable = null;
+	Thread smsCheckerThread = null;
+	private TestThreading2 callLoggerRunnerable = null;
+	Thread callLoggerThread = null;
 
-	@Override
-	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@SuppressLint("HandlerLeak")
+	Handler handler = new Handler()
+    {
+
+		@Override public void handleMessage(Message msg)
+            {
+			//Ends threads and move to verify loss	
+			Log.d("handle message", "massage handeled");
+				
+				if (smsCheckerThread != null)
+				{
+					smsCheckerRunnable.terminate();
+					try {
+						smsCheckerThread.join();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+				if (callLoggerThread != null)
+				{
+					callLoggerRunnerable.terminate();
+					try {
+						callLoggerThread.join();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				Intent intentservice = new Intent(getApplicationContext(),VerifyLossService.class);
+				startService(intentservice);
+            }
+    };
+    
 	
 	@Override
     public void onCreate() {
@@ -23,58 +62,28 @@ public class DetectLossService extends Service {
 		Toast.makeText(getApplicationContext(), "Your Device is Starting to be protected",
 				   Toast.LENGTH_LONG).show();
     
-		Thread mBackground1;
-		Thread mBackground2;
+		smsCheckerRunnable = new TestThreading2(handler);
+		smsCheckerThread = new Thread (smsCheckerRunnable);
+		callLoggerRunnerable = new TestThreading2(handler);
+		callLoggerThread = new Thread (callLoggerRunnerable);
 		
-		mBackground1 = new Thread(new Runnable()
-        {
-                // Setup the run() method that is called when the background thread
-                // is started.
-                public void run()
-                {
-                        // Do you background thread process here...
-                        // In my case, strMsgRcvd is a String where I store
-                        // the message received via my socket.
-
-                	for(int i = 0; i < 10; i++)
-                	{
-                		Log.d("DetectLossService", "first tread test: " + i);
-                		
-                	}
-                
-
-                }
-        });
-		
-		mBackground2 = new Thread(new Runnable()
-        {
-                // Setup the run() method that is called when the background thread
-                // is started.
-                public void run()
-                {
-                        // Do you background thread process here...
-                        // In my case, strMsgRcvd is a String where I store
-                        // the message received via my socket.
-
-                	for(int i = 0; i < 10; i++)
-                	{
-                		Log.d("DetectLossService", "second tread test: " + i);
-                		
-                	}
-                
-
-                }
-        });
-		
-		mBackground1.start();
-		mBackground2.start();
+        
+		callLoggerThread.start();
+		smsCheckerThread.start();
 	
 	}
 
 	
 	
-
-		
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+   
 	
 }
 
