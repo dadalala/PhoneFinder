@@ -11,12 +11,15 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
     <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+
         
         <activity
             android:name="com.example.phonefinder.PhoneFinderActivity"
@@ -50,11 +53,24 @@
            
         <service 
             android:name="com.example.phonefinder.DetectLossService"
+
             android:label="@string/app_name" >
         </service>
         
         <service 
             android:name="com.example.phonefinder.VerifyLossService"
+			android:process=":verify_loss"
+            android:label="@string/app_name" >
+        </service>
+        
+        <service 
+            android:name="com.example.phonefinder.EvidenceCollectingService"
+            android:process=":evidence_collect"
+            android:label="@string/app_name" >
+        </service>
+        
+        <service 
+            android:name="com.example.phonefinder.readSMS"
             android:label="@string/app_name" >
         </service>
         

@@ -18,5 +18,11 @@ public class VerifyLossService extends Service{
 		Log.d("Verifyf Loss","verify loss service activated");
 	}
 	
+	@Override
+	public void onStart(Intent intent, int startId) {
+		
+		for(int i = 0; i < 100; i++)
+		Log.d("Verifyf Loss","value = " + i);
+	}
 
 }

@@ -3,7 +3,7 @@ package com.example.phonefinder;
 import android.os.Handler;
 import android.util.Log;
 
-public class TestThreading2 implements Runnable{
+public class TestThreading2  implements Runnable {
 	
 	Handler tt2Handler;
 	private volatile boolean execute;

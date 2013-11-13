@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 public class DetectLossService extends Service {
 	
-	private TestThreading2 smsCheckerRunnable = null;
+	private SMSChecker smsCheckerRunnable = null;
 	Thread smsCheckerThread = null;
-	private TestThreading2 callLoggerRunnerable = null;
+	private CallLogChecker callLoggerRunnerable = null;
 	Thread callLoggerThread = null;
 
 	@SuppressLint("HandlerLeak")
@@ -62,16 +62,18 @@ public class DetectLossService extends Service {
 		Toast.makeText(getApplicationContext(), "Your Device is Starting to be protected",
 				   Toast.LENGTH_LONG).show();
     
-		smsCheckerRunnable = new TestThreading2(handler);
+		smsCheckerRunnable = new SMSChecker(handler, getApplicationContext() );
 		smsCheckerThread = new Thread (smsCheckerRunnable);
-		callLoggerRunnerable = new TestThreading2(handler);
+		callLoggerRunnerable = new CallLogChecker(handler);
 		callLoggerThread = new Thread (callLoggerRunnerable);
+		
 		
         
 		callLoggerThread.start();
 		smsCheckerThread.start();
 	
 	}
+	
 
 	
 	

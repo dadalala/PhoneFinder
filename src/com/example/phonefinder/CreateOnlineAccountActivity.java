@@ -11,9 +11,11 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class CreateOnlineAccountActivity extends Activity{
 	
 	private static String email ;
 	private static String password ;
+	private static String IMEI;
 	public static final String accountDetailsPref = "accountDetails";
 	
 	private ProgressDialog pDialog;
@@ -34,7 +37,7 @@ public class CreateOnlineAccountActivity extends Activity{
 	JSONParser jsonParser = new JSONParser();
 	
 	// url to get all products list
-		private static String url_signup = "http://132.132.422.13/project/signup.php";
+		private static String url_signup = "http://172.23.41.28/www/signup.php";
 		
 		// JSON Node names
 			private static final String TAG_SUCCESS = "success";
@@ -56,6 +59,7 @@ public class CreateOnlineAccountActivity extends Activity{
 				//save details
 				email = emailAddress.getText().toString();
 				password = acctPassword.getText().toString();
+				//IMEI = getIMEINumber();
 				//upload account details to database
 				new CreateAccount().execute();
 				
@@ -66,19 +70,7 @@ public class CreateOnlineAccountActivity extends Activity{
 			}
 		});
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 	}// on create
 	
 	
@@ -95,9 +87,26 @@ public class CreateOnlineAccountActivity extends Activity{
 	 }//on Stop
 	 
 	 
+	String getIMEINumber ()
+	{
+		String IMEI;
+		
+		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		IMEI = telephonyManager.getDeviceId();
+		
+		return IMEI;
+	}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 /**
-		 * Background Async Task to Create new product
+		 * Background Async Task to Create new account
 		 * */
 		class CreateAccount extends AsyncTask<String, String, String> {
 
