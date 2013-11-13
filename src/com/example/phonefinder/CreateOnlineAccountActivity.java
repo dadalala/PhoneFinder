@@ -37,7 +37,7 @@ public class CreateOnlineAccountActivity extends Activity{
 	JSONParser jsonParser = new JSONParser();
 	
 	// url to get all products list
-		private static String url_signup = "http://172.23.41.28/www/signup.php";
+		private static String url_signup = "http://172.23.49.254/project/signup.php";
 		
 		// JSON Node names
 			private static final String TAG_SUCCESS = "success";

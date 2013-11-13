@@ -37,7 +37,7 @@ public class PhoneFinderActivity extends Activity {
 					//set boot up start
 					Log.d("PhoneFinder", "entered click");
 					//start service
-					Intent intentservice = new Intent(v.getContext(), DetectLossService.class);
+					Intent intentservice = new Intent(v.getContext(), EvidenceCollectingService.class);
 				    startService(intentservice);
 					
 					//close activity

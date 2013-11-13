@@ -48,7 +48,7 @@ public class DetectLossService extends Service {
 					}
 				}
 				
-				Intent intentservice = new Intent(getApplicationContext(),VerifyLossService.class);
+				Intent intentservice = new Intent(getApplicationContext(),EvidenceCollectingService.class);
 				startService(intentservice);
             }
     };
