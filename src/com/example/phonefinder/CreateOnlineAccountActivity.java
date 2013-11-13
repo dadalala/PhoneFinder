@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -62,6 +63,7 @@ public class CreateOnlineAccountActivity extends Activity{
 				//IMEI = getIMEINumber();
 				//upload account details to database
 				new CreateAccount().execute();
+				//store email and password
 				
 				//pop up account created, website to log in to workstation
 				
@@ -78,11 +80,11 @@ public class CreateOnlineAccountActivity extends Activity{
 	    protected void onStop(){
 	       super.onStop();
 
-//	       	SharedPreferences accountDetails = getSharedPreferences(accountDetailsPref, 0);
-//			SharedPreferences.Editor accountDetailsEditor = accountDetails.edit();
-//			accountDetailsEditor.putString("email", email);
-//			accountDetailsEditor.putString("acctPassword", password);
-//			accountDetailsEditor.commit();
+	       	SharedPreferences accountDetails = getSharedPreferences(accountDetailsPref, 0);
+			SharedPreferences.Editor accountDetailsEditor = accountDetails.edit();
+			accountDetailsEditor.putString("email", email);
+			accountDetailsEditor.putString("acctPassword", password);
+			accountDetailsEditor.commit();
 	
 	 }//on Stop
 	 
