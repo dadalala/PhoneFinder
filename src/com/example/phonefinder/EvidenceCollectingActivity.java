@@ -37,24 +37,24 @@ public class EvidenceCollectingActivity extends Activity{
 			}
 		});
 
-// 		callLog.setOnClickListener(new View.OnClickListener() {
-//			
-// 			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(v.getContext(),GetCallLog.class);
-//				startActivity(intent);
-//			}
-//		});
+ 		callLog.setOnClickListener(new View.OnClickListener() {
+			
+ 			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(),CallLogCheckerActivity.class);
+				startActivity(intent);
+			}
+		});
 
-// 		faceDetection.setOnClickListener(new View.OnClickListener() {
-//			
-// 			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(v.getContext(),LightDetection.class);
-//				startService(intent);
-//			}
-//		});
-// 		
+ 		faceDetection.setOnClickListener(new View.OnClickListener() {
+			
+ 			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(),FaceDetection.class);
+				startActivity(intent);
+			}
+		});
+ 		
 
 
     }
