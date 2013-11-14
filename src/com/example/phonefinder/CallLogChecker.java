@@ -23,7 +23,7 @@ public class CallLogChecker implements Runnable{
 			while (this.execute)
 			{
 				//do stuff here....
-				
+				//call CallLogCheckerService
 			}
 			
 
