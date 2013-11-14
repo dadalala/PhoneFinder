@@ -25,7 +25,7 @@ public class PhoneFinderActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(v.getContext(),SettingsActivity.class);
+					Intent intent = new Intent(v.getContext(),WifiCheckerActivity.class);
 					startActivity(intent);
 				}
 			});
@@ -37,7 +37,7 @@ public class PhoneFinderActivity extends Activity {
 					//set boot up start
 					Log.d("PhoneFinder", "entered click");
 					//start service
-					Intent intentservice = new Intent(v.getContext(), WifiCheckerActivity.class);
+					Intent intentservice = new Intent(v.getContext(), SendSMSToThirdParty.class);
 				    startService(intentservice);
 					
 					//close activity

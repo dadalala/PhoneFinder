@@ -104,6 +104,11 @@ public class SendSMSToThirdParty extends Service{
 	                 {
 	                	 Log.d("SendSMSToThirdParty","starting new intent");
 	                	//start to collect evidence
+	                	 Intent i = new Intent();
+	                     i.setClassName("com.example.phonefinder", "com.example.phonefinder.EvidenceCollectingActivity");
+	                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	                     context.startActivity(i);
+	                     System.out.println("run to here?");
 	                 }
 	                 else
 	                 {

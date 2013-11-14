@@ -110,7 +110,8 @@ public class WifiCheckerActivity extends Activity  {
             	
             }
             	
-             //compare with database wifilist?      			
+             //compare with database wifilist?  
+            
          }
         
         
