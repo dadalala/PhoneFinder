@@ -20,5 +20,14 @@
         android:layout_marginLeft="44dp"
         android:layout_marginTop="27dp"
         android:text="wifi connection List" />
+
+<Button
+	    android:id="@+id/button"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/button"
+	    android:layout_centerVertical="true"
+	    android:text="Next" />
+
 </RelativeLayout>
 </ScrollView>
