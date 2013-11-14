@@ -9,9 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -50,12 +48,8 @@ private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 // Declaring a Location Manager
 protected LocationManager locationManager;
 
-// Handler to communicate with thread
-Handler mhandler;
-
-public GPSTracker(Context context, Handler handler) {
+public GPSTracker(Context context) {
     this.mContext = context;
-    this.mhandler = handler;
     getLocation();
 }
 
@@ -126,22 +120,22 @@ public void stopUsingGPS() {
 
 //Function to get latitude
 
-public void getLatitude() {
+public double getLatitude() {
     if (location != null) {
         latitude = location.getLatitude();
     }
     // return latitude
-    threadMsg(latitude,mhandler);
+    return latitude;
 }
 
 // Function to get longitude
 
-public void getLongitude() {
+public double getLongitude() {
     if (location != null) {
         longitude = location.getLongitude();
     }
     // return longitude
-    threadMsg(longitude,mhandler);
+    return longitude;
 }
 
 /**
@@ -153,14 +147,40 @@ public boolean canGetLocation() {
     return this.canGetLocation;
 }
 
-private void threadMsg(double msg, Handler handler) {
-    
-          Message msgObj = handler.obtainMessage();
-          Bundle b = new Bundle();
-          b.putDouble("message", msg);
-          msgObj.setData(b);
-          handler.sendMessage(msgObj);
-  }
+/**
+ * Function to show settings alert dialog On pressing Settings button will
+ * lauch Settings Options
+ * */
+public void showSettingsAlert() {
+    AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+
+    // Setting Dialog Title
+    alertDialog.setTitle("GPS is settings");
+
+    // Setting Dialog Message
+    alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+
+    // On pressing Settings button, to display settings pages
+    alertDialog.setPositiveButton("Settings",
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(
+                            Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    mContext.startActivity(intent);
+                }
+            });
+
+    // on pressing cancel button, to cancel
+    alertDialog.setNegativeButton("Cancel",
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+    // Showing Alert Message
+    alertDialog.show();
+}
 
 @Override
 public void onLocationChanged(Location location) {
@@ -182,5 +202,5 @@ public void onStatusChanged(String provider, int status, Bundle extras) {
 public IBinder onBind(Intent arg0) {
     return null;
 }
-
 }
+

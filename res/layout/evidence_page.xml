@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_color_blue" >
+
+    <Button
+        android:id="@+id/getCurrAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="23dp"
+        android:text="Get Curr Address" />
+
+    <Button
+        android:id="@+id/callLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/getCurrAddress"
+        android:layout_below="@+id/getCurrAddress"
+        android:layout_marginTop="23dp"
+        android:text="Get Call Log" />
+
+    <Button
+        android:id="@+id/faceDetection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/callLog"
+        android:layout_below="@+id/callLog"
+        android:layout_marginTop="22dp"
+        android:text="Face Detection" />
+
+</RelativeLayout>
