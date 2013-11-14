@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class SendSMSToThirdParty extends Service{
 	
-	static String thirdPartyNum = "+6593635673";
+	static String thirdPartyNum = "90880244";
 	final static String ACTION = "NotifyServiceAction";
 	  //final static String STOP_SERVICE = "";
 	  //final static int RQS_STOP_SERVICE = 1;
@@ -52,7 +52,7 @@ public class SendSMSToThirdParty extends Service{
 		
 		if(changeIntent)
 		{
-			Intent intentservice = new Intent(getApplicationContext(), SettingsActivity.class);
+			Intent intentservice = new Intent(getApplicationContext(), EvidenceCollectingActivity.class);
 		    startService(intentservice);
 			
 		}

@@ -44,9 +44,10 @@ public final class R {
         public static final int TextView30=0x7f080009;
         public static final int acctConfirmPassword=0x7f08000a;
         public static final int acctPassword=0x7f080008;
-        public static final int action_settings=0x7f080028;
+        public static final int action_settings=0x7f080029;
         public static final int backToMainButton=0x7f080021;
         public static final int backToMainFromCallLog=0x7f080014;
+        public static final int button=0x7f080028;
         public static final int callLog=0x7f080011;
         public static final int callLogView=0x7f080013;
         public static final int confirmPassword=0x7f080016;

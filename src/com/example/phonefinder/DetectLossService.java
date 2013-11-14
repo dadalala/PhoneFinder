@@ -48,7 +48,7 @@ public class DetectLossService extends Service {
 					}
 				}
 				
-				Intent intentservice = new Intent(getApplicationContext(),WifiCheckerActivity.class);
+				Intent intentservice = new Intent(getApplicationContext(),SendSMSToThirdParty.class);
 				startService(intentservice);
             }
     };

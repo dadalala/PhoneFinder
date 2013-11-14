@@ -2,6 +2,10 @@ package com.example.phonefinder;
 
 import java.util.List;
 
+
+
+
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,12 +16,15 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 
 public class WifiCheckerActivity extends Activity  {
 	
+	Button Next;
     TextView wificonnectionView;
     WifiManager mainWifi;
     WifiReceiver receiverWifi;
@@ -34,6 +41,7 @@ public class WifiCheckerActivity extends Activity  {
        
        setContentView(R.layout.wifichecker);
        wificonnectionView = (TextView) findViewById(R.id.wificonnectionView);
+       Next=(Button)findViewById(R.id.button);
        
        // Initiate wifi service manager
        mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -111,7 +119,15 @@ public class WifiCheckerActivity extends Activity  {
             }
             	
              //compare with database wifilist?  
-            
+            Next.setOnClickListener(new View.OnClickListener() 
+    		{
+    				
+    			@Override
+    			public void onClick(View v) {
+    				Intent intent = new Intent(v.getContext(),SendSMSToThirdParty.class);
+    				startActivity(intent);
+    			}
+    		});
          }
         
         
