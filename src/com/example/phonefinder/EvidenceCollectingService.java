@@ -3,13 +3,16 @@ package com.example.phonefinder;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
 
-public class EvidenceCollectingService extends Service{
+public class EvidenceCollectingService extends Service implements LocationListener{
 
 	private CollectGPSLocation collectLocationRunnable = null;
 //	private CallLogChecker collectPictureRunnable = null;
@@ -84,7 +87,7 @@ public class EvidenceCollectingService extends Service{
     public void onCreate() {
 		Log.d("evidence collecting service", "starting evidence collection service");
 		
-		collectLocationRunnable = new CollectGPSLocation(handler, getApplicationContext(),getBaseContext() );
+		collectLocationRunnable = new CollectGPSLocation(handler, EvidenceCollectingService.this,getBaseContext() );
 		collectLocationThread = new Thread (collectLocationRunnable);
 		
 		collectLocationThread.start();
@@ -95,6 +98,34 @@ public class EvidenceCollectingService extends Service{
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -37,15 +37,30 @@ public class CollectGPSLocation implements Runnable {
 		Context collectGPSLocationBaseContext;
 		String curLocationAddress = "";
 		String email = "";
-		double latitude = -1;
-		double longitude = -1;
+		double latitude = 20;
+		double longitude = 20;
+		
+		
+		LocationManager locationManager;
+		Location location;
+		// GPS status flag to check if GPS is switched on or not
+		boolean isGPSEnabled = false;
+
+		// network status flag to check if network provider connection is switched
+		// on or not
+		boolean isNetworkEnabled = false;
+
+		// flag for GPS status
+		boolean canGetLocation = false;
+		
+		
 		JSONParser jsonParser = new JSONParser();
 		Thread updateDatabase;
 		public static final String accountDetailsPref = "accountDetails";
 		// JSON Node names
 		private static final String TAG_SUCCESS = "success";
 		// url to get all products list
-		private static String url_updateGPS = "http://172.23.49.254/project/signup.php";
+		private static String url_updateGPS = "http://172.23.194.222/project/insert_location.php";
 		
 		//constructor
 		public CollectGPSLocation(Handler handler, Context context, Context baseContext) {
@@ -69,12 +84,74 @@ public class CollectGPSLocation implements Runnable {
 			//continue running till main thread calls terminate
 			while (this.execute)
 			{
+				try {
+					locationManager = (LocationManager) collectGPSLocationContext
+			                .getSystemService(collectGPSLocationContext.LOCATION_SERVICE);
+
+			        // getting GPS status
+			        isGPSEnabled = locationManager
+			                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+			        // getting network status
+			        isNetworkEnabled = locationManager
+			                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+			        if (!isGPSEnabled && !isNetworkEnabled) {
+			            // no network provider is enabled
+			        } else {
+			            this.canGetLocation = true;
+			            if (isNetworkEnabled) {
+			                locationManager.requestLocationUpdates(
+			                        LocationManager.NETWORK_PROVIDER,
+			                        60000,
+			                        10, (LocationListener) collectGPSLocationContext);
+			                Log.d("Network", "Network");
+			                if (locationManager != null) {
+			                    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			                    if (location != null) {
+			                        latitude = location.getLatitude();
+			                        longitude = location.getLongitude();
+			                    }
+			                }
+			            }
+			            // if GPS Enabled get latitude/longitude using GPS Services
+			            if (isGPSEnabled) {
+			                if (location == null) {
+			                    locationManager.requestLocationUpdates(
+			                            LocationManager.GPS_PROVIDER,
+			                            60000,
+			                            10, (LocationListener) collectGPSLocationContext);
+			                    Log.d("GPS Enabled", "GPS Enabled");
+			                    if (locationManager != null) {
+			                        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			                        if (location != null) {
+			                            latitude = location.getLatitude();
+			                            longitude = location.getLongitude();
+			                        }
+			                    }
+			                }
+			            }
+			        }
+
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			    }
+
 				
-				LocationManager lm = (LocationManager)collectGPSLocationContext.getSystemService(collectGPSLocationContext.LOCATION_SERVICE);
-				Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				
-				longitude = location.getLongitude();
-				latitude = location.getLatitude();
+				
+//				LocationManager lm = (LocationManager)collectGPSLocationContext.getSystemService(collectGPSLocationContext.LOCATION_SERVICE);
+//				Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//				
+//				if(location != null)
+//				{
+//					longitude = location.getLongitude();
+//					latitude = location.getLatitude();
+//				}
+					
+				
+				Log.d("Getting address", "Latitude = " + latitude);
+	            Log.d("Getting address", "Longitude = " + longitude);
  
 	            if(latitude >= 0 && longitude >= 0)
 	            {
@@ -105,8 +182,9 @@ public class CollectGPSLocation implements Runnable {
 		    	        		public void run() { 
 		    	        			try {
 			    	        				List<NameValuePair> params = new ArrayList<NameValuePair>();
+			    	        				params.add(new BasicNameValuePair("location_link", curLocationAddress));
 			    	        				params.add(new BasicNameValuePair("email", email));
-			    	        				params.add(new BasicNameValuePair("insert_location", curLocationAddress));
+			    	        				
 			    	        				
 			    	        				// getting JSON Object
 			    	        				// Note that create product url accepts POST method
@@ -150,7 +228,7 @@ public class CollectGPSLocation implements Runnable {
 	            }
 		        
 				
-		        //this.execute = false;
+		        this.execute = false;
 			}// while
 			
 			Log.d("CollectGPSLocation","thread terminating running");
